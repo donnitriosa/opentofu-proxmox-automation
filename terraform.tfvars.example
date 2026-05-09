@@ -1,0 +1,19 @@
+# =============================================================================
+# Proxmox Connection
+# =============================================================================
+
+proxmox_endpoint = "https://your-proxmox-ip:8006"
+proxmox_username = "root@pam"
+proxmox_password = "your-secure-password"
+proxmox_insecure = true
+
+# =============================================================================
+# Common Settings
+# =============================================================================
+
+target_node     = "pve"
+default_bridge  = "vmbr0"
+default_storage = "local-lvm"
+gateway         = "10.10.10.1"
+dns_servers     = ["8.8.8.8", "1.1.1.1"]
+ssh_public_key  = "ssh-ed25519 AAAA... your-public-key-here"

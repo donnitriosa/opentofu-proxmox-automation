@@ -1,0 +1,55 @@
+# =============================================================================
+# VM xxx — [Nama VM]
+#
+# [Deskripsi singkat VM ini]
+# =============================================================================
+
+# module "vm_example" {
+#   source = "../modules/vm"
+#
+#   name              = "vm-example"
+#   vmid              = 110
+#   target_node       = var.target_node
+#   clone_template_id = 9001     # <-- Template ID langsung di sini
+#
+#   # Compute
+#   cores   = 2
+#   sockets = 1
+#   memory  = 2048               # MB (2048 = 2GB, 4096 = 4GB)
+#
+#   # Storage
+#   disk_size = 23               # 23GB minimum
+#   storage   = var.default_storage
+#
+#   # Network
+#   bridge      = var.default_bridge
+#   ip_address  = "[IP_ADDRESS]"
+#   gateway     = var.gateway
+#   dns_servers = var.dns_servers
+#
+#   # Cloud-Init                  <-- Credentials langsung di sini
+#   ci_user        = "debian"
+#   ci_password    = "[PASSWORD]"
+#   ssh_public_key = var.ssh_public_key
+#
+#   # Metadata
+#   description = "Example VM"
+#   tags        = ["example", "homelab"]
+# }
+#
+# ─── Jangan lupa tambahkan output! ──────────────────────────────────────────
+# 1. Di file vms/outputs.tf:
+#    output "vm_example" {
+#      description = "VM xxx — Example"
+#      value = {
+#        id = module.vm_example.vm_id
+#        ip = module.vm_example.ip_address
+#      }
+#    }
+#
+# 2. Di file outputs.tf (root):
+#    output "vm_example" {
+#      description = "VM xxx — Example"
+#      value       = module.vms.vm_example
+#    }
+# ────────────────────────────────────────────────────────────────────────────

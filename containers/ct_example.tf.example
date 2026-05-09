@@ -1,0 +1,54 @@
+# =============================================================================
+# CT xxx — [Nama Container]
+#
+# [Deskripsi singkat container ini]
+# =============================================================================
+
+# module "ct_example" {
+#   source = "../modules/lxc"
+#
+#   hostname    = "ct-example"
+#   vmid        = 110
+#   target_node = var.target_node
+#   ostemplate  = "local:vztmpl/debian-12-standard_12.12-1_amd64.tar.zst"  # <-- Template langsung di sini
+#
+#   # Compute
+#   cores  = 1
+#   memory = 512                 # MB (512 = 512MB, 1024 = 1GB)
+#   swap   = 512
+#
+#   # Storage
+#   disk_size = 8                # GB
+#   storage   = var.default_storage
+#
+#   # Network
+#   bridge      = var.default_bridge
+#   ip_address  = "[IP_ADDRESS]"
+#   gateway     = var.gateway
+#   dns_servers = var.dns_servers
+#
+#   # Auth                        <-- Password langsung di sini
+#   password        = "[PASSWORD]"
+#   ssh_public_keys = var.ssh_public_key != "" ? [var.ssh_public_key] : []
+#
+#   # Metadata
+#   description = "Example container"
+#   tags        = ["example", "homelab"]
+# }
+#
+# ─── Jangan lupa tambahkan output! ──────────────────────────────────────────
+# 1. Di file containers/outputs.tf:
+#    output "ct_example" {
+#      description = "CT xxx — Example"
+#      value = {
+#        id = module.ct_example.container_id
+#        ip = module.ct_example.ip_address
+#      }
+#    }
+#
+# 2. Di file outputs.tf (root):
+#    output "ct_example" {
+#      description = "CT xxx — Example"
+#      value       = module.containers.ct_example
+#    }
+# ────────────────────────────────────────────────────────────────────────────
