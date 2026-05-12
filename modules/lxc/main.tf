@@ -74,6 +74,18 @@ resource "proxmox_virtual_environment_container" "container" {
   }
 
   # ---------------------------------------------------------------------------
+  # Additional Mount Points (Disks)
+  # ---------------------------------------------------------------------------
+  dynamic "mount_point" {
+    for_each = var.additional_disks
+    content {
+      volume = mount_point.value.volume
+      size   = mount_point.value.size
+      path   = mount_point.value.path
+    }
+  }
+
+  # ---------------------------------------------------------------------------
   # Network
   # ---------------------------------------------------------------------------
   network_interface {

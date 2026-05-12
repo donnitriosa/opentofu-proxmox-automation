@@ -17,9 +17,21 @@
 #   memory = 512                 # MB (512 = 512MB, 1024 = 1GB)
 #   swap   = 512
 #
-#   # Storage
+#   # Storage Utama (Rootfs)
+#   # PERHATIAN: Kamu bisa MENAMBAH (expand) ukuran disk di kemudian hari.
+#   # Namun, JANGAN PERNAH MENURUNKAN (shrink) ukuran disk karena tidak 
+#   # disupport oleh Proxmox dan bisa menyebabkan error.
 #   disk_size = 8                # GB
 #   storage   = var.default_storage
+#
+#   # (Optional) Tambahan Disk / Mount Points
+#   # additional_disks = [
+#   #   {
+#   #     volume = "local-lvm"   # Nama storage pool
+#   #     size   = "10G"         # Perhatikan satuan 'G' untuk LXC mount point
+#   #     path   = "/mnt/data"   # Lokasi mount di dalam container
+#   #   }
+#   # ]
 #
 #   # Network
 #   bridge      = var.default_bridge

@@ -9,3 +9,7 @@
 #   value       = module.vms.vm_docker
 # }
 
+output "vm-test" {
+  description = "VM test create via x/terraform"
+  value       = module.vms.vm-test
+}

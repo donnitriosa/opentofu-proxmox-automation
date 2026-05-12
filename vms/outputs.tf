@@ -12,10 +12,10 @@
 #   }
 # }
 
-output "vm_test" {
-   description = "vm untuk test create via terraform"
-   value = {
-     id = module.vm_test.vm_id
-     ip = module.vm_test.ip_address
-   }
+output "vm-test" {
+  description = "VM test create via x/terraform"
+  value = {
+    id = module.vm-test.vm_id
+    ip = module.vm-test.ip_address
+  }
 }

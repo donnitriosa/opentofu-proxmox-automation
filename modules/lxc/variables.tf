@@ -48,6 +48,16 @@ variable "storage" {
   default     = "local-lvm"
 }
 
+variable "additional_disks" {
+  description = "List of additional disks/mount points. PERINGATAN: Jangan pernah menurunkan ukuran disk (shrink) karena tidak disupport Proxmox dan bisa merusak data."
+  type = list(object({
+    volume = string # Storage pool name (e.g. "local-lvm") atau existing volume
+    size   = string # Size dengan satuan (e.g. "10G")
+    path   = string # Path mount point di dalam container (e.g. "/mnt/data")
+  }))
+  default = []
+}
+
 variable "bridge" {
   description = "Network bridge"
   type        = string

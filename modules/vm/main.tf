@@ -47,12 +47,26 @@ resource "proxmox_virtual_environment_vm" "vm" {
   # ---------------------------------------------------------------------------
   # Disk
   # ---------------------------------------------------------------------------
+  # Disk Utama (scsi0)
   disk {
     datastore_id = var.storage
     size         = var.disk_size
     interface    = "scsi0"
     discard      = "on"
     ssd          = true
+  }
+
+  # Disk Tambahan (scsi1, scsi2, dst)
+  dynamic "disk" {
+    for_each = var.additional_disks
+    content {
+      datastore_id = disk.value.datastore_id
+      size         = disk.value.size
+      interface    = coalesce(disk.value.interface, "scsi${disk.key + 1}")
+      file_format  = disk.value.file_format
+      discard      = "on"
+      ssd          = true
+    }
   }
 
   # ---------------------------------------------------------------------------
@@ -83,14 +97,5 @@ resource "proxmox_virtual_environment_vm" "vm" {
     dns {
       servers = var.dns_servers
     }
-  }
-
-  # ---------------------------------------------------------------------------
-  # Lifecycle
-  # ---------------------------------------------------------------------------
-  lifecycle {
-    ignore_changes = [
-      disk[0].size,
-    ]
   }
 }

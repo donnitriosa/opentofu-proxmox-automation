@@ -17,9 +17,24 @@
 #   sockets = 1
 #   memory  = 2048               # MB (2048 = 2GB, 4096 = 4GB)
 #
-#   # Storage
-#   disk_size = 23               # 23GB minimum
+#   # Storage Utama (scsi0)
+#   # PERHATIAN: Kamu bisa MENAMBAH (expand) ukuran disk di kemudian hari.
+#   # Namun, JANGAN PERNAH MENURUNKAN (shrink) ukuran disk karena tidak 
+#   # disupport oleh Proxmox dan bisa menyebabkan error.
+#   disk_size = 23               # 23GB minimum base size template
 #   storage   = var.default_storage
+#
+#   # (Optional) Tambahan Disk
+#   # additional_disks = [
+#   #   {
+#   #     datastore_id = "local-lvm"
+#   #     size         = 50      # GB
+#   #   },
+#   #   {
+#   #     datastore_id = "local-lvm"
+#   #     size         = 100     # GB
+#   #   }
+#   # ]
 #
 #   # Network
 #   bridge      = var.default_bridge

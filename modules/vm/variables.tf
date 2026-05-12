@@ -48,6 +48,17 @@ variable "storage" {
   default     = "local-lvm"
 }
 
+variable "additional_disks" {
+  description = "List of additional disks (contoh: storage kedua, dst). PERINGATAN: Jangan pernah menurunkan ukuran disk (shrink) karena tidak disupport Proxmox dan bisa merusak data."
+  type = list(object({
+    datastore_id = string
+    size         = number
+    file_format  = optional(string, "raw")
+    interface    = optional(string)
+  }))
+  default = []
+}
+
 variable "bridge" {
   description = "Network bridge"
   type        = string
