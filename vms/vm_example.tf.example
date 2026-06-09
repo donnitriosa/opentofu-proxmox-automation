@@ -10,7 +10,7 @@
 #   name              = "vm-example"
 #   vmid              = 110
 #   target_node       = var.target_node
-#   clone_template_id = 9001     # <-- Template ID langsung di sini
+#   clone_template_id = 9000     # <-- Template ID langsung di sini
 #
 #   # Compute
 #   cores   = 2
@@ -47,10 +47,16 @@
 #   ci_password    = "[PASSWORD]"
 #   ssh_public_key = var.ssh_public_key
 #
+#   # User Data (Optional)
+#   # Menggunakan file external dari folder userdata/
+#   user_data = file("${path.module}/../userdata/base-setup.yaml")
+#   
+#   datastore_id = var.snippet_storage
+#
 #   # Metadata
-#   description = "Example VM"
-#   tags        = ["example", "homelab"]
-# }
+#   # description = "Example VM"
+#   # tags        = ["example", "homelab"]
+# # }
 #
 # ─── Jangan lupa tambahkan output! ──────────────────────────────────────────
 # 1. Di file vms/outputs.tf:

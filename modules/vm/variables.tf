@@ -117,3 +117,15 @@ variable "started" {
   type        = bool
   default     = true
 }
+
+variable "user_data" {
+  description = "Cloud-init user-data script/config"
+  type        = string
+  default     = ""
+}
+
+variable "datastore_id" {
+  description = "Datastore ID for storing cloud-init snippets"
+  type        = string
+  default     = "local"
+}

@@ -43,6 +43,10 @@
 #   password        = "[PASSWORD]"
 #   ssh_public_keys = var.ssh_public_key != "" ? [var.ssh_public_key] : []
 #
+#   # User Data (Optional)
+#   # Untuk LXC, kita gunakan shell script (.sh)
+#   user_data = file("${path.module}/../userdata/base-setup.sh")
+#
 #   # Metadata
 #   description = "Example container"
 #   tags        = ["example", "homelab"]

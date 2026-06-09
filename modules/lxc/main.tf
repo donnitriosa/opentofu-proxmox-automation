@@ -100,3 +100,28 @@ resource "proxmox_virtual_environment_container" "container" {
     nesting = var.nesting
   }
 }
+
+# ---------------------------------------------------------------------------
+# User Data (Provisioner)
+# ---------------------------------------------------------------------------
+# Resource ini hanya akan berjalan jika var.user_data tidak kosong.
+# Memerlukan akses SSH ke container (port 22 terbuka dan reachable).
+resource "null_resource" "lxc_userdata" {
+  count = var.user_data != "" ? 1 : 0
+
+  triggers = {
+    user_data    = var.user_data
+    container_id = proxmox_virtual_environment_container.container.id
+  }
+
+  provisioner "remote-exec" {
+    inline = [var.user_data]
+
+    connection {
+      type     = "ssh"
+      user     = "root"
+      password = var.password
+      host     = split("/", var.ip_address)[0]
+    }
+  }
+}

@@ -31,3 +31,8 @@ variable "ssh_public_key" {
   description = "SSH public key"
   type        = string
 }
+
+variable "snippet_storage" {
+  description = "Default storage for snippets"
+  type        = string
+}

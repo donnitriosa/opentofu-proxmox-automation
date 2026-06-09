@@ -122,3 +122,9 @@ variable "started" {
   type        = bool
   default     = true
 }
+
+variable "user_data" {
+  description = "User-data script to run after container creation (requires SSH)"
+  type        = string
+  default     = ""
+}

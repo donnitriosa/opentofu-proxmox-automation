@@ -1,0 +1,28 @@
+#cloud-config
+package_update: true
+package_upgrade: false
+
+timezone: Asia/Jakarta
+locale: en_US.UTF-8
+
+apt:
+  primary:
+    - arches: [default]
+      uri: http://kartolo.sby.datautama.net.id/debian/
+
+packages:
+  - qemu-guest-agent
+  - curl
+  - wget
+  - vim
+  - htop
+  - git
+  - net-tools
+  - locales
+
+runcmd:
+  - systemctl enable --now qemu-guest-agent
+  - sed -i 's/^# *\(en_US.UTF-8 UTF-8\)/\1/' /etc/locale.gen
+  - locale-gen
+  - update-locale LANG=en_US.UTF-8 LC_ALL=en_US.UTF-8
+  - echo 'debian ALL=(ALL) NOPASSWD:ALL' > /etc/sudoers.d/90-cloud-init-users

@@ -63,3 +63,9 @@ variable "ssh_public_key" {
   type        = string
   default     = ""
 }
+
+variable "snippet_storage" {
+  description = "Storage pool for cloud-init snippets (must support 'Snippets' content type)"
+  type        = string
+  default     = "local"
+}

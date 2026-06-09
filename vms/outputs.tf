@@ -11,11 +11,3 @@
 #     ip = module.vm_example.ip_address
 #   }
 # }
-
-output "vm-test" {
-  description = "VM test create via x/terraform"
-  value = {
-    id = module.vm-test.vm_id
-    ip = module.vm-test.ip_address
-  }
-}

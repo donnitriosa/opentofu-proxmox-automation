@@ -18,6 +18,7 @@ module "vms" {
   gateway         = var.gateway
   dns_servers     = var.dns_servers
   ssh_public_key  = var.ssh_public_key
+  snippet_storage = var.snippet_storage
 }
 
 # -----------------------------------------------------------------------------
@@ -33,4 +34,5 @@ module "containers" {
   gateway         = var.gateway
   dns_servers     = var.dns_servers
   ssh_public_key  = var.ssh_public_key
+  snippet_storage = var.snippet_storage
 }

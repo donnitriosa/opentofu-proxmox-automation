@@ -20,6 +20,10 @@ resource "proxmox_virtual_environment_vm" "vm" {
   on_boot = true
   started = var.started
 
+  agent {
+    enabled = true
+  }
+
   # ---------------------------------------------------------------------------
   # Clone from template
   # ---------------------------------------------------------------------------
@@ -97,5 +101,55 @@ resource "proxmox_virtual_environment_vm" "vm" {
     dns {
       servers = var.dns_servers
     }
+
+    user_data_file_id = var.user_data != "" ? proxmox_virtual_environment_file.user_data[0].id : null
+  }
+
+  lifecycle {
+    ignore_changes = [
+      initialization[0].user_data_file_id,
+    ]
+  }
+}
+
+# =============================================================================
+# User Data (Snippets)
+# =============================================================================
+
+resource "proxmox_virtual_environment_file" "user_data" {
+  count = var.user_data != "" ? 1 : 0
+
+  content_type = "snippets"
+  datastore_id = var.datastore_id
+  node_name    = var.target_node
+
+  source_raw {
+    data      = <<-EOT
+#cloud-config
+hostname: ${var.name}
+manage_etc_hosts: true
+fqdn: ${var.name}
+
+chpasswd:
+  expire: False
+
+users:
+  - default
+  - name: ${var.ci_user}
+    groups: sudo
+    shell: /bin/bash
+    sudo: ALL=(ALL) NOPASSWD:ALL
+%{ if var.ci_password != "" }
+    password: ${var.ci_password}
+    lock_passwd: false
+%{ endif }
+%{ if var.ssh_public_key != "" }
+    ssh_authorized_keys:
+      - ${trimspace(var.ssh_public_key)}
+%{ endif }
+
+${replace(var.user_data, "#cloud-config", "")}
+EOT
+    file_name = "user-data-${var.name}.yaml"
   }
 }
